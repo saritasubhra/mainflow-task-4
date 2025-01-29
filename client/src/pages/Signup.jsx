@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import useSignUp from "../hooks/useSignUp";
 
 function Signup() {
+  const { inputs, handleInputs, handleSubmit, isLoading } = useSignUp();
   return (
     <div className="max-w-md mx-auto p-8 rounded-md shadow-2xl">
-      <form className="w-full space-y-4">
+      <form className="w-full space-y-4" onSubmit={handleSubmit}>
         <h1 className="text-3xl font-bold">Create your account</h1>
         <div>
           <label htmlFor="fullname" className="label">
@@ -13,6 +15,8 @@ function Signup() {
             id="fullname"
             type="text"
             name="fullname"
+            value={inputs.fullname}
+            onChange={handleInputs}
             required
             className="input"
           />
@@ -26,6 +30,8 @@ function Signup() {
             id="email"
             type="email"
             name="email"
+            value={inputs.email}
+            onChange={handleInputs}
             required
             className="input"
           />
@@ -39,6 +45,8 @@ function Signup() {
             id="password"
             type="password"
             name="password"
+            value={inputs.password}
+            onChange={handleInputs}
             required
             className="input"
           />
@@ -52,6 +60,8 @@ function Signup() {
             id="passwordConfirm"
             type="password"
             name="passwordConfirm"
+            value={inputs.passwordConfirm}
+            onChange={handleInputs}
             required
             className="input"
           />
@@ -59,6 +69,7 @@ function Signup() {
 
         <button
           type="submit"
+          disabled={isLoading}
           className="w-full font-semibold bg-violet-400 hover:bg-violet-500 duration-300 py-3 rounded-md text-white mt-2 cursor-pointer"
         >
           Create Account

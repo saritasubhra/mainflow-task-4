@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
 function Login() {
+  const { inputs, handleInputs, handleSubmit, isLoading } = useLogin();
   return (
     <div className="max-w-md mx-auto p-8 rounded-md shadow-2xl">
-      <form className="w-full space-y-4">
+      <form className="w-full space-y-4" onSubmit={handleSubmit}>
         <h1 className="text-3xl font-bold">Log in to your account</h1>
 
         <div>
@@ -14,6 +16,8 @@ function Login() {
             id="email"
             type="email"
             name="email"
+            value={inputs.email}
+            onChange={handleInputs}
             required
             className="input"
           />
@@ -27,6 +31,8 @@ function Login() {
             id="password"
             type="password"
             name="password"
+            value={inputs.password}
+            onChange={handleInputs}
             required
             className="input"
           />
@@ -34,6 +40,7 @@ function Login() {
 
         <button
           type="submit"
+          disabled={isLoading}
           className="w-full font-semibold bg-violet-400 hover:bg-violet-500 duration-300 py-3 rounded-md text-white mt-2 cursor-pointer"
         >
           Log in
